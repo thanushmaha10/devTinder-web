@@ -8,10 +8,11 @@ import { addUser } from "../utils/userSlice";
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [age, setAge] = useState(user.age);
+
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [gender, setGender] = useState(user.gender);
-  const [about, setAbout] = useState(user.about);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [about, setAbout] = useState(user.about || "");
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -82,12 +83,13 @@ const EditProfile = ({ user }) => {
                 <legend className="fieldset-legend">Gender</legend>
 
                 <select
-                  defaultValue="Gender"
                   className="select appearance-none"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                 >
-                  <option disabled={true}>Gender</option>
+                  <option value="" disabled>
+                    Gender
+                  </option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="others">others</option>
